@@ -25,3 +25,32 @@ body {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+.sidebar_item.active {
+  color: aquamarine;
+}
+
+.content .sidebar_content{
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+.content .sidebar_content iframe {
+  width: 100%;
+  height: 100%;
+  display: none;
+  border: none;
+}
+
+.content .sidebar_content.active {
+  display: flex;
+}
+
+.content .sidebar_content.active iframe{
+  display: flex;
+}
+
+.card .content {
+  width: 90%;
+}

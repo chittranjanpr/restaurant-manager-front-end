@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Assistant:400,700"
+      rel="stylesheet"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="../../static/css/profile.css" />
+  </head>
+  <body>
+    <div class="profile_content_wrapper">
+      <!-- Bio Data -->
+      <div class="profile_bio_wrapper">
+        <div class="profile_icon">
+          <img src="./../../static/images/profile.jpg" />
+        </div>
+        <div class="bio_data">
+          <div class="profile_name">
+            Chittranjan P R
+          </div>
+          <div class="profile_clock" id="profile_clock_in_out">
+            Clocked out at 8.00 AM
+          </div>
+        </div>
+      </div>
+
+      <div id="clock-in-out" onclick="toggleClock()">
+        Clock In
+      </div>
+
+      <div class="profile_card">
+        <div class="header">Current Revenue</div>
+        <div class="content">640.00</div>
+      </div>
+
+      <div class="profile_card">
+        <div class="header">Paid</div>
+        <div class="content">280.00</div>
+      </div>
+
+      <div class="profile_card">
+        <div class="header">Tips</div>
+        <div class="content">0.00</div>
+      </div>
+    </div>
+
+    <script>
+      let is_clock_in = true
+
+      function toggleClock() {
+        const getClockValue = document.getElementById('clock-in-out')
+        const profile_clock = document.getElementById('profile_clock_in_out')
+        if (is_clock_in) {
+          getClockValue.innerHTML = 'Clock Out'
+          profile_clock.innerHTML = `Clocked in at ${formatAMPM()}`
+        } else {
+          getClockValue.innerHTML = 'Clock In'
+          profile_clock.innerHTML = `Clocked out at ${formatAMPM()}`
+        }
+
+        is_clock_in = !is_clock_in
+      }
+
+      function formatAMPM() {
+        var hours = new Date().getHours()
+        var minutes = new Date().getMinutes()
+        var ampm = hours >= 12 ? 'pm' : 'am'
+        hours = hours % 12
+        hours = hours ? hours : 12 
+        minutes = minutes < 10 ? '0' + minutes : minutes
+        var strTime = hours + ':' + minutes + ' ' + ampm
+        return strTime
+      }
+    </script>
+  </body>
+</html>
