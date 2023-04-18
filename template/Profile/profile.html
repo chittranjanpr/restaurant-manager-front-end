@@ -22,7 +22,6 @@
             Chittranjan P R
           </div>
           <div class="profile_clock" id="profile_clock_in_out">
-            Clocked out at 8.00 AM
           </div>
         </div>
       </div>
@@ -48,14 +47,22 @@
     </div>
 
     <script>
-      let is_clock_in = localStorage.getItem('is_clocked_in')
+      let user_data = JSON.parse(localStorage.getItem('user_data'))
+      let is_clock_in = user_data.is_clock_in;
+      const getClockValue = document.getElementById('clock-in-out')
+      const profile_clock = document.getElementById('profile_clock_in_out')
 
-      // if()
+      if(is_clock_in){
+          getClockValue.innerHTML = 'Clock Out'
+          profile_clock.innerHTML = `Clocked in at ${user_data.clock_in_time}`
+      }
+
+      if(!is_clock_in && user_data.clock_out_time){
+          getClockValue.innerHTML = 'Clock In'
+          profile_clock.innerHTML = `Clocked in at ${user_data.clock_out_time}`
+      }
 
       function toggleClock() {
-        const getClockValue = document.getElementById('clock-in-out')
-        const profile_clock = document.getElementById('profile_clock_in_out')
-
         fetch('http://127.0.0.1:8000/clockin_and_clockout', {
                 method: 'POST',
                 headers: {
@@ -64,20 +71,28 @@
                 body: JSON.stringify({
                     user_id: localStorage.getItem('user_id'),
                     toggle_text: is_clock_in ? 'clock_out' : 'clock_in',
-                    date: new Date
+                    time_client: formatAMPM()
                 })
             })
             .then(response => response.json())
             .then(data => {
-              console.log(data)
-              if (is_clock_in) {
-                getClockValue.innerHTML = 'Clock Out'
-                profile_clock.innerHTML = `Clocked in at ${formatAMPM()}`
-              } else {
-                getClockValue.innerHTML = 'Clock In'
-                profile_clock.innerHTML = `Clocked out at ${formatAMPM()}`
+              if(data.success == true){
+                if (!is_clock_in) {
+                  user_data.is_clock_in = true,
+                  user_data.clock_in_time = formatAMPM()
+                  localStorage.setItem('user_data', JSON.stringify(user_data))
+                  getClockValue.innerHTML = 'Clock Out'
+                  profile_clock.innerHTML = `Clocked in at ${formatAMPM()}`
+                 
+                } else {
+                  user_data.is_clock_in = false
+                  user_data.clock_out_time = formatAMPM()
+                  localStorage.setItem('user_data', JSON.stringify(user_data))
+                  getClockValue.innerHTML = 'Clock In'
+                  profile_clock.innerHTML = `Clocked out at ${formatAMPM()}`
+                }
+                is_clock_in = !is_clock_in
               }
-              is_clock_in = !is_clock_in
             })
             .catch(error => console.error(error))
       }

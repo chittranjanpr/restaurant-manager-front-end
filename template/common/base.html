@@ -8,8 +8,8 @@
         let is_logged_in = localStorage.getItem('user_id')
         let get_base = window.location.pathname
         if(!is_logged_in && get_base != '/'){
-            window.location.href = '/'
-        }
+            window.location.href = '/';
+        } 
     </script>
      {% block head_links %}{% endblock %}
 </head>

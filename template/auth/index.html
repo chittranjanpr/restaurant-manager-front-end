@@ -39,10 +39,9 @@
             .then(response => response.json())
             .then(data => {
                 document.getElementById('loader').style.display = "none";
-                // document.getElementById('do-login').disabled= "enable";
                 if(data.success == true){
                     localStorage.setItem('user_id', value);
-                    localStorage.setItem('is_clocked_in', false);
+                    localStorage.setItem('user_data', JSON.stringify(data.resp));
                     window.location.href = "/mainPage";
                 } else{
                     document.getElementById('message').innerHTML = "Retry"
