@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}My Website{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css?family=Assistant:400,700" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        let is_logged_in = localStorage.getItem('user_id')
+        let get_base = window.location.pathname
+        if(!is_logged_in && get_base != '/'){
+            window.location.href = '/'
+        }
+    </script>
+     {% block head_links %}{% endblock %}
+</head>
+<body>
+    {% block content %}{% endblock %}
+</body>
+    {% block bottom_head_links_1 %}{% endblock %}
+</html>

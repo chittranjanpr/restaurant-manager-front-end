@@ -1,15 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Assistant:400,700"
-      rel="stylesheet"
-    />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>{{ title }}</title>
     <link rel="stylesheet" href="../../static/css/orderPage.css" />
-    <!-- <link rel="stylesheet" href="../../static/css/globalCss.css" /> -->
   </head>
   <body>
     <div class="center_content order_content_wrapper">
@@ -32,7 +25,7 @@
       <!-- MENU PAGE -->
       <div class="column_menu_page" id="column_menu_page">
         <div class="column_list">
-          {% for value in menu_items | default([]) %}
+          {% for value in data.menu_items | default([]) %}
           <div class="list_items" onclick="click_list_items(`{{value}}`)">
             <p>{{ value.name }}</p>
             <p>{{ value.price }}</p>

@@ -48,20 +48,38 @@
     </div>
 
     <script>
-      let is_clock_in = true
+      let is_clock_in = localStorage.getItem('is_clocked_in')
+
+      // if()
 
       function toggleClock() {
         const getClockValue = document.getElementById('clock-in-out')
         const profile_clock = document.getElementById('profile_clock_in_out')
-        if (is_clock_in) {
-          getClockValue.innerHTML = 'Clock Out'
-          profile_clock.innerHTML = `Clocked in at ${formatAMPM()}`
-        } else {
-          getClockValue.innerHTML = 'Clock In'
-          profile_clock.innerHTML = `Clocked out at ${formatAMPM()}`
-        }
 
-        is_clock_in = !is_clock_in
+        fetch('http://127.0.0.1:8000/clockin_and_clockout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    user_id: localStorage.getItem('user_id'),
+                    toggle_text: is_clock_in ? 'clock_out' : 'clock_in',
+                    date: new Date
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+              console.log(data)
+              if (is_clock_in) {
+                getClockValue.innerHTML = 'Clock Out'
+                profile_clock.innerHTML = `Clocked in at ${formatAMPM()}`
+              } else {
+                getClockValue.innerHTML = 'Clock In'
+                profile_clock.innerHTML = `Clocked out at ${formatAMPM()}`
+              }
+              is_clock_in = !is_clock_in
+            })
+            .catch(error => console.error(error))
       }
 
       function formatAMPM() {

@@ -1,26 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Assistant:400,700"
-      rel="stylesheet"
-    />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <title>{{ title }}</title>
-    <link rel="stylesheet" href="./../../static/css/globalCss.css" />
-    <link rel="stylesheet" href="./../../static/css/orderPage.css" />
+    {% block head_links %}
+        <title>{{ title }}</title>
+        <link rel="stylesheet" href="./../../static/css/globalCss.css" />
+        <link rel="stylesheet" href="./../../static/css/orderPage.css" />   
+    {% endblock %}
   </head>
   <body>
+    {% extends "/common/base.html" %}
+    
+    {% block content %}
+
     <section class="card">
       <!-- Side Bar -->
       <div class="sidebar">
         {% for value in data.side_bar %}
-        <div
-          class="sidebar_item"
-          id="{{value}}"
-          onclick="setActiveSideBar('{{value}}')"
-        >
+        <div class="sidebar_item" id="{{value}}" onclick="setActiveSideBar('{{value}}')">
           {{ value }}
         </div>
         {% endfor %}
@@ -39,36 +35,40 @@
         </div>
       </div>
     </section>
+    {% endblock %}
   </body>
-  <script type="text/javascript">
-    setActiveSideBar('Profile')
 
-    var dataString = JSON.parse('{{ data | tojson | safe }}')
+  {% block bottom_head_links_1 %}
+    <script type="text/javascript">
+      setActiveSideBar('Profile')
 
-    function setActiveSideBar(value) {
-      let sidebar_item = document.querySelectorAll('.sidebar_item')
-      let sidebar_content = document.querySelectorAll('.sidebar_content')
+      var dataString = JSON.parse('{{ data | tojson | safe }}')
 
-      sidebar_content.forEach(function (item) {
-        item.classList.remove('active')
-      })
-      sidebar_item.forEach(function (item) {
-        item.classList.remove('active')
-      })
+      function setActiveSideBar(value) {
+        let sidebar_item = document.querySelectorAll('.sidebar_item')
+        let sidebar_content = document.querySelectorAll('.sidebar_content')
 
-      document.getElementById(value).classList.add('active')
-      document.getElementById(value + '_content').classList.add('active')
-
-      // loadContent(value);
-    }
-
-    function loadContent(value) {
-      fetch(`${value}/${value.toLowerCase()}.html`)
-        .then((response) => response.text())
-        .then((data) => {
-          const tabContent = document.querySelector(`#${value}_content`)
-          tabContent.innerHTML = data
+        sidebar_content.forEach(function (item) {
+          item.classList.remove('active')
         })
-    }
-  </script>
+        sidebar_item.forEach(function (item) {
+          item.classList.remove('active')
+        })
+
+        document.getElementById(value).classList.add('active')
+        document.getElementById(value + '_content').classList.add('active')
+
+        // loadContent(value);
+      }
+
+      function loadContent(value) {
+        fetch(`${value}/${value.toLowerCase()}.html`)
+          .then((response) => response.text())
+          .then((data) => {
+            const tabContent = document.querySelector(`#${value}_content`)
+            tabContent.innerHTML = data
+          })
+      }
+    </script>
+  {% endblock %}
 </html>
