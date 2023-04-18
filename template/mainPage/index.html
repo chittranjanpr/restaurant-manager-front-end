@@ -18,6 +18,12 @@
         {% for value in data.side_bar %}
         <div class="sidebar_item" id="{{value}}" onclick="setActiveSideBar('{{value}}')">
           {{ value }}
+
+          {% if value == 'Dashboard' %}
+            {% for side_bar_item in data.dashboard %} 
+              <div class="dashboard_list_item" id="{{side_bar_item}}" onclick="setInnerActive(event, '{{side_bar_item}}')">{{side_bar_item}}</div>
+            {% endfor %}
+          {% endif %}
         </div>
         {% endfor %}
       </div>
@@ -27,11 +33,17 @@
         <div id="Profile_content" class="sidebar_content">
           <iframe src="./../Profile/profile.html"></iframe>
         </div>
-        <div id="Dashboard_content" class="sidebar_content">
-          <iframe src="./../Dashboard/dashboard.html"></iframe>
-        </div>
         <div id="Order_content" class="sidebar_content">
           <iframe src="./../Order/order.html"></iframe>
+        </div>
+        <div id="create_user_content" class="sidebar_content">
+          <iframe src="./../Dashboard/create_user.html"></iframe>
+        </div>
+        <div id="sales_report_content" class="sidebar_content">
+          <iframe src="./../Dashboard/sales_report.html"></iframe>
+        </div>
+        <div id="inventory_management_content" class="sidebar_content">
+          <iframe src="./../Dashboard/inventory_management.html"></iframe>
         </div>
       </div>
     </section>
@@ -40,6 +52,28 @@
 
   {% block bottom_head_links_1 %}
     <script type="text/javascript">
+      function setInnerActive(event, value) {
+        event.stopPropagation();
+        setInnerActiveSideBar(value);
+      }
+
+      function setInnerActiveSideBar(value) {
+        const content = value.toLowerCase().split(' ').join('_');
+        let dashboard_list_item = document.querySelectorAll('.dashboard_list_item')
+        let sidebar_content = document.querySelectorAll('.sidebar_content')
+
+        sidebar_content.forEach(function (item) {
+          item.classList.remove('active')
+        })
+        dashboard_list_item.forEach(function (item) {
+          item.classList.remove('active')
+        })
+
+        document.getElementById(value).classList.add('active')
+        console.log('content', content);
+        document.getElementById(content + '_content').classList.add('active')
+      }
+
       setActiveSideBar('Profile')
 
       var dataString = JSON.parse('{{ data | tojson | safe }}')
@@ -56,9 +90,11 @@
         })
 
         document.getElementById(value).classList.add('active')
-        document.getElementById(value + '_content').classList.add('active')
 
-        // loadContent(value);
+        if(value != 'Dashboard') 
+          document.getElementById(value + '_content').classList.add('active')
+        else 
+         setInnerActiveSideBar('Create User');
       }
 
       function loadContent(value) {

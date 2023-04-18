@@ -30,5 +30,17 @@ def order_content():
     data = response.json()
     return render_template('/Order/order.html', title = 'Home Page', appName = appName, data = data)
 
+@app.route('/Dashboard/create_user.html')
+def create_user_content():
+  return render_template('/Dashboard/create_user.html', title = 'Create user Page', appName = appName)
+
+@app.route('/Dashboard/sales_report.html')
+def sales_report_content():
+  return render_template('/Dashboard/sales_report.html', title = 'Sales Report Page', appName = appName)
+
+@app.route('/Dashboard/inventory_management.html')
+def inventory_management_content():
+  return render_template('/Dashboard/inventory_management.html', title = 'Inventory Management Page', appName = appName)
+
 if __name__ == '__main__':
     app.run(debug=True)
