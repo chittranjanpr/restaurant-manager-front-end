@@ -13,7 +13,6 @@ def home():
 def order_page():
     response = requests.get('http://127.0.0.1:8000/get_store_details')
     data = response.json()
-    print(data)
     return render_template('/mainPage/index.html', title = 'Home Page', appName = appName, data = data)
 
 @app.route('/Profile/profile.html')

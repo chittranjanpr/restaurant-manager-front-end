@@ -1,32 +1,46 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="./../../static/css/dashboard.css">
-    </head>
-    <body>
-        <div class="profile_card">
-            <div class="card_item">
-                <div class="header">Name</div>
-                <input type="text" />
-            </div>
-            <div class="card_item">
-                <div class="header">Password</div>
-                <input type="text" />
-            </div>
-            <div class="card_item flex-box">
-                <div class="header">Admin</div>
-                <input type="checkbox" />
-            </div>
-
-            <div class="card_item button-card">
-                <div class="header button">CREATE USER</div>
-            </div>
-        </div>
-        <script src="" async defer></script>
-    </body>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./../../static/css/dashboard.css" />
+  </head>
+  <body>
+    <header>Create User</header>
+    <div class="profile_card">
+      <div class="card_item">
+        <div class="header">Name</div>
+        <input type="text" id="name" />
+      </div>
+      <div class="card_item">
+        <div class="header">Password</div>
+        <input type="number" id="password" />
+      </div>
+      <div class="card_item flex-box">
+        <div class="header">Admin</div>
+        <input type="checkbox" id="is_admin" />
+      </div>
+      <div class="card_item button-card">
+        <div class="header button" onclick="create_user()">CREATE USER</div>
+      </div>
+    </div>
+    <script>
+      function create_user() {
+        fetch('http://127.0.0.1:8000/create_user', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: document.getElementById('name')?.value,
+            password: document.getElementById('password')?.value,
+            is_admin: document.getElementById('is_admin').checked,
+          }),
+        })
+      }
+    </script>
+  </body>
 </html>

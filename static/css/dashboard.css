@@ -2,6 +2,20 @@
     font-family: Assistant, sans-serif;
     color: black;
   }
+
+  
+header{
+  font-size: 18px;
+  color: black;
+  text-align: center;
+  padding: 18px;
+  margin-bottom: 3%;
+  background: black;
+  color: white;
+  border-radius: 6px;
+}
+
+
 .profile_card{
     border-radius: 10px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
@@ -50,7 +64,7 @@
     justify-content: center;
   }
 
-  .profile_card input[type="text"] {
+  .profile_card input[type="text"], .profile_card input[type="number"] {
     border: none;
     outline: none;
     width: 100%;

@@ -3,13 +3,26 @@
   color: white;
 }
 .profile_icon {
-  width: 125px;
-  height: 125px;
+  width: 40%;
+  height: 40%;
   border-radius: 50%;
   overflow: hidden;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
   margin-top: 3%;
 }
+
+
+header{
+  font-size: 18px;
+  color: black;
+  text-align: center;
+  padding: 18px;
+  margin-bottom: 3%;
+  background: black;
+  color: white;
+  border-radius: 6px;
+}
+
   
   .profile_icon img {
     display: block;
