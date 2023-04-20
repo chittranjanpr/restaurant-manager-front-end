@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="./../../static/css/profile.css">
-        <link rel="stylesheet" href="./../../static/css/salesReport.css">
-    </head>
-    <body>
-        <header>Sales Report</header>
-        <content>
-            <div class="profile_card">
-                <div class="header">Current Revenue</div>
-                <div class="content">640.00</div>
-            </div>
-        </content>
-        <script src="" async defer>
-        </script>
-    </body>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./../../static/css/profile.css" />
+    <link rel="stylesheet" href="./../../static/css/salesReport.css" />
+  </head>
+  <body>
+    <header>Sales Report</header>
+    <content>
+      {% for data in sales_report %}
+      <div class="profile_card">
+        <div class="header">{{ data.name }}</div>
+        <div class="content">{{ data.count }}</div>
+      </div>
+      {% endfor %}
+    </content>
+  </body>
 </html>

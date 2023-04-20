@@ -35,7 +35,9 @@ def create_user_content():
 
 @app.route('/Dashboard/sales_report.html')
 def sales_report_content():
-  return render_template('/Dashboard/sales_report.html', title = 'Sales Report Page', appName = appName)
+  response = requests.get('http://127.0.0.1:8000/get_sales_report')
+  data = response.json()
+  return render_template('/Dashboard/sales_report.html', title = 'Sales Report Page', sales_report = data)
 
 @app.route('/Dashboard/inventory_management.html')
 def inventory_management_content():
