@@ -1,5 +1,5 @@
 * {
-  font-family: Assistant, sans-serif;
+  /* font-family: Assistant, sans-serif; */
   color: white;
 }
 html {
@@ -7,13 +7,12 @@ html {
   overflow-x: hidden;
 }
 ::-webkit-scrollbar {
-  width: 0;  
+  width: 0;
   border-radius: 50%;
-  background: transparent;  
+  background: transparent;
 }
 
-
-header{
+header {
   font-size: 18px;
   color: black;
   text-align: center;
@@ -54,20 +53,21 @@ header{
   overflow: auto;
 }
 
-.sidebar_item{
-    margin: 20px 0px;
-    padding: 10px 0px;
-    cursor: pointer;
+.sidebar_item {
+  margin: 20px 0px;
+  padding: 10px 0px;
+  cursor: pointer;
 }
 
-.center_content{
-    width: 90%;
+.center_content {
+  width: 90%;
 }
 
 .header {
   border-bottom: 1px solid white;
   width: 100%;
   padding-bottom: 10px;
+  text-align: center;
 }
 
 .footer {
@@ -78,20 +78,20 @@ header{
   height: 25px;
 }
 
-.column_menu_page{
+.column_menu_page {
   display: none;
   margin-top: 10px;
   height: 88%;
 }
 
-.column_table{
+.column_table {
   margin-top: 20px;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
 }
 
-.table_cards{
+.table_cards {
   width: 30%;
   cursor: pointer;
   height: 80px;
@@ -104,7 +104,7 @@ header{
   text-align: center;
 }
 
-.column_list{
+.column_list {
   width: 40%;
   display: flex;
   justify-content: space-around;
@@ -116,11 +116,11 @@ header{
   margin-bottom: 10px;
 }
 
-.column_display{
+.column_display {
   width: 60%;
 }
 
-.list_items{
+.list_items {
   cursor: pointer;
   background-color: currentColor;
   color: #136a8a;
@@ -132,12 +132,13 @@ header{
   margin-bottom: 10px;
 }
 
-.item_display_column_title{
+.item_display_column_title {
   padding-bottom: 10px;
   border-bottom: 1px solid white;
+  text-align: center;
 }
 
-.item_display_column_headers{
+.item_display_column_headers {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -148,23 +149,31 @@ header{
   margin: auto;
 }
 
-.item_display_column_body_row{
+.item_display_column_body {
+  width: 91%;
+  margin: auto;
+  text-align: center;
+}
+
+.item_display_column_body_row {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
   padding-bottom: 5px;
-  width: 80%;
-  margin: auto;
 }
 
-.subtotal{
+.item_display_column_body_row p {
+  width: 30%;
+}
+
+.subtotal {
   position: absolute;
   right: 3%;
   bottom: 8%;
   font-size: 20px;
 }
 
-.check_out{
+.check_out {
   display: none;
   text-align: end;
   right: 4%;
@@ -173,10 +182,125 @@ header{
   cursor: pointer;
 }
 
-.column_checkout_page{
+.column_checkout_page {
   display: none;
 }
 
 .order_content_wrapper {
   width: 100%;
+}
+
+.tax_card {
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+  width: 35%;
+  padding: 18px;
+  margin-top: 10px;
+  display: flex;
+  cursor: pointer;
+  justify-content: space-between;
+  height: auto;
+  flex-direction: column;
+  margin: 0 auto;
+  font-family: cursive;
+  color: white;
+}
+
+.tax_card_title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 30px;
+}
+
+.tax_card_id {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 0px;
+}
+
+.tax_card_items{
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0px;
+}
+
+.line{
+  width: 50%;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: auto;
+  padding: 0;
+}
+
+.tax_break{
+  text-align: end;
+  padding: 10px 0px;
+}
+
+.tax_greet{
+  text-align: center;
+  padding: 10px 0px;
+}
+
+.tax_submit{
+  box-shadow: 0px 2px 4px rgb(0 0 0 / 44%);
+  width: 35%;
+  margin: 20px auto;
+  padding: 10px;
+  border: 10px;
+  height: auto;
+  border-radius: 5px;
+  text-align: center;
+  color: wheat;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  background: teal;
+  cursor: pointer;
+}
+
+#snackbar {
+  visibility: hidden; /* Hidden by default. Visible on click */
+  min-width: 250px; /* Set a default minimum width */
+  margin-left: -125px; /* Divide value of min-width by 2 */
+  background-color: teal; /* Black background color */
+  color: #fff; /* White text color */
+  text-align: center; /* Centered text */
+  border-radius: 2px; /* Rounded borders */
+  padding: 16px; /* Padding */
+  position: fixed; /* Sit on top of the screen */
+  z-index: 1; /* Add a z-index if needed */
+  left: 50%; /* Center the snackbar */
+  bottom: 30px; /* 30px from the bottom */
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
+  visibility: visible; /* Show the snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
 }
