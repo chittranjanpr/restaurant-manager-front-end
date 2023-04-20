@@ -26,6 +26,8 @@
           {% endif %}
         </div>
         {% endfor %}
+
+        <div class="logout" onclick="logout()">Log Out</div>
       </div>
 
       <!-- Side Bar Content -->
@@ -104,6 +106,13 @@
             const tabContent = document.querySelector(`#${value}_content`)
             tabContent.innerHTML = data
           })
+      }
+
+      function logout() {
+        localStorage.removeItem('user_id')
+        localStorage.removeItem('user_data')
+        localStorage.removeItem('is_clocked_in')
+        window.location.href = '/'
       }
     </script>
   {% endblock %}

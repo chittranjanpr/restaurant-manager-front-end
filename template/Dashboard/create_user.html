@@ -17,7 +17,7 @@
       </div>
       <div class="card_item">
         <div class="header">Password</div>
-        <input type="number" id="password" />
+        <input type="number" id="password" maxlength="4" pattern="^[0-9]$" onkeyup="checkLength()"/>
       </div>
       <div class="card_item flex-box">
         <div class="header">Admin</div>
@@ -28,6 +28,15 @@
       </div>
     </div>
     <script>
+      
+      function checkLength() {
+        pwd = document.getElementById('password')
+        if(pwd.value.length > 4 ) {
+          alert('Pwd should not exceed more than 4 digits')
+            pwd.value = ''
+        }
+      }
+
       function create_user() {
         fetch('http://127.0.0.1:8000/create_user', {
           method: 'POST',

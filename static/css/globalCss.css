@@ -74,3 +74,11 @@ body {
 #Dashboard.active .dashboard_list_item.active{
   color: chartreuse;
 }
+
+.logout {
+  color: white;
+  position: absolute;
+  bottom: 50px;
+  cursor: pointer;
+  font-size: 18px;
+}
