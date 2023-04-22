@@ -54,6 +54,10 @@
 
   {% block bottom_head_links_1 %}
     <script type="text/javascript">
+      let is_admin = localStorage.getItem('is_admin');
+      if(is_admin != 'admin')
+        document.getElementById('Dashboard').style.display = 'none';
+
       function setInnerActive(event, value) {
         event.stopPropagation();
         setInnerActiveSideBar(value);
@@ -72,7 +76,6 @@
         })
 
         document.getElementById(value).classList.add('active')
-        console.log('content', content);
         document.getElementById(content + '_content').classList.add('active')
       }
 
@@ -109,9 +112,7 @@
       }
 
       function logout() {
-        localStorage.removeItem('user_id')
-        localStorage.removeItem('user_data')
-        localStorage.removeItem('is_clocked_in')
+        localStorage.removeAll();
         window.location.href = '/'
       }
     </script>

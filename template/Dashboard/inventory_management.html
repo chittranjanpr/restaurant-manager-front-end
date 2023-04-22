@@ -1,22 +1,62 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-        I am inventory management
-        <script src="" async defer></script>
-    </body>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../../static/css/profile.css" />
+    <link rel="stylesheet" href="../../static/css/inventory_management.css" />
+    <link rel="stylesheet" href="../../static/css/snackBar.css" />
+  </head>
+  <body>
+    <header>Inventory Management</header>
+    <content>
+      <div class="profile_card subheader">
+        <div class="header">Item Name</div>
+        <div class="content">Qty</div>
+        <div>Update Qty</div>
+      </div>
+      {% for data in stocks %}
+      <div class="profile_card">
+        <div class="header">{{ data.name }}</div>
+        <div class="content">{{ data.quantity }}</div>
+        <input type="number" id="{{data.id}}" />
+        <button onclick="update_stock('{{data.id}}')">UPDATE</button>
+      </div>
+      {% endfor %}
+    </content>
+    <div id="snackbar"></div>
+    <script>
+      function update_stock(id) {
+        console.log('update stock', id)
+        fetch('http://127.0.0.1:8000/update_product_stock', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            id: parseInt(id),
+            quantity: parseInt(document.getElementById(id).value),
+          }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById(id).value = ''
+            if (data.success == true) {
+              var x = document.getElementById('snackbar')
+              x.innerHTML = 'Saved Successfully'
+              x.className = 'show'
+              setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+            } else{
+              var x = document.getElementById("snackbar");
+              x.innerHTML = 'Something went wrong'
+              x.className = "show";
+              setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+            }
+          })
+      }
+    </script>
+  </body>
 </html>

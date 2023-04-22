@@ -7,6 +7,7 @@
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="./../../static/css/dashboard.css" />
+    <link rel="stylesheet" href="../../static/css/snackBar.css" />
   </head>
   <body>
     <header>Create User</header>
@@ -27,6 +28,7 @@
         <div class="header button" onclick="create_user()">CREATE USER</div>
       </div>
     </div>
+    <div id="snackbar"></div>
     <script>
       
       function checkLength() {
@@ -48,7 +50,23 @@
             password: document.getElementById('password')?.value,
             is_admin: document.getElementById('is_admin').checked,
           }),
-        })
+        }).then((response) => response.json())
+          .then((data) => {
+            document.getElementById('name').value = ''
+            document.getElementById('password').value = ''
+            document.getElementById('is_admin').checked = false
+            if (data.success == true) {
+              var x = document.getElementById('snackbar')
+              x.innerHTML = 'Saved Successfully'
+              x.className = 'show'
+              setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+            } else{
+              var x = document.getElementById("snackbar");
+              x.innerHTML = 'Something went wrong'
+              x.className = "show";
+              setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+            }
+          })
       }
     </script>
   </body>

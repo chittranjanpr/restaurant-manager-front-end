@@ -122,7 +122,7 @@ header {
 
 .list_items {
   cursor: pointer;
-  background-color: currentColor;
+  background: linear-gradient(45deg, black, transparent);;
   color: #136a8a;
   width: 47%;
   border: 1px solid white;
@@ -130,6 +130,10 @@ header {
   font-size: 18px;
   text-align: center;
   margin-bottom: 10px;
+}
+
+.list_items:hover {
+  background: linear-gradient(45deg, #212b36, transparent);
 }
 
 .item_display_column_title {
@@ -303,4 +307,9 @@ header {
 @keyframes fadeout {
   from {bottom: 30px; opacity: 1;}
   to {bottom: 0; opacity: 0;}
+}
+
+.disable-item {
+  pointer-events: none;
+  background-color: rgba(0, 0, 0, 0.3);
 }

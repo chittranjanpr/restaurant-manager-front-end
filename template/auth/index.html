@@ -42,6 +42,7 @@
                 if(data.success == true){
                     localStorage.setItem('user_id', value);
                     localStorage.setItem('user_data', JSON.stringify(data.resp));
+                    localStorage.setItem('is_admin', data.resp.is_admin)
                     window.location.href = "/mainPage";
                 } else{
                     document.getElementById('message').innerHTML = "Retry"

@@ -41,7 +41,9 @@ def sales_report_content():
 
 @app.route('/Dashboard/inventory_management.html')
 def inventory_management_content():
-  return render_template('/Dashboard/inventory_management.html', title = 'Inventory Management Page', appName = appName)
+  response = requests.get('http://127.0.0.1:8000/get_stocks')
+  data = response.json()
+  return render_template('/Dashboard/inventory_management.html', title = 'Inventory Management Page', stocks = data)
 
 if __name__ == '__main__':
     app.run(debug=True)
