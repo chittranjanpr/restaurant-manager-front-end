@@ -21,16 +21,15 @@
       {% for data in stocks %}
       <div class="profile_card">
         <div class="header">{{ data.name }}</div>
-        <div class="content">{{ data.quantity }}</div>
+        <div class="content" id="item_{{data.id}}">{{ data.quantity }}</div>
         <input type="number" id="{{data.id}}" />
-        <button onclick="update_stock('{{data.id}}')">UPDATE</button>
+        <button onclick="update_stock('{{data.id}}', '{{data.quantity}}')">UPDATE</button>
       </div>
       {% endfor %}
     </content>
     <div id="snackbar"></div>
     <script>
-      function update_stock(id) {
-        console.log('update stock', id)
+      function update_stock(id, quantity) {
         fetch('http://127.0.0.1:8000/update_product_stock', {
           method: 'POST',
           headers: {
@@ -43,12 +42,14 @@
         })
           .then((response) => response.json())
           .then((data) => {
+            document.getElementById('item_'+id).innerHTML = parseInt(quantity) + parseInt(document.getElementById(id).value)
             document.getElementById(id).value = ''
             if (data.success == true) {
               var x = document.getElementById('snackbar')
               x.innerHTML = 'Saved Successfully'
               x.className = 'show'
               setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+              console.log('document.getElementById(id).value', document.getElementById(id).value)
             } else{
               var x = document.getElementById("snackbar");
               x.innerHTML = 'Something went wrong'

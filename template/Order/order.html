@@ -144,6 +144,7 @@
                   current_table = null;
                   selected_items = [];
                   tax_order_id = null;
+                  document.getElementById('header').innerHTML = 'Orders Page'
                   document.getElementById('column_table').style.display = 'flex'
                   document.getElementById('check_out').style.display = 'none'
                   document.getElementById('column_checkout_page').style.display = 'none'
@@ -181,7 +182,6 @@
           function create_display() {
             var subtotal = 0
             var itemList = document.getElementById('item_display_column_body')
-            console.log('selected_items', selected_items)
             for (var i = 0; i < selected_items.length; i++) {
               var item = selected_items[i]
               var div = document.createElement('div')

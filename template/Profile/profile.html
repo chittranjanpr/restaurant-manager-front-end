@@ -32,17 +32,11 @@
 
       <div class="profile_card">
         <div class="header">Current Revenue</div>
-        <div class="content">640.00</div>
+        <div class="content" id="revenue"></div>
       </div>
-
-      <div class="profile_card">
-        <div class="header">Paid</div>
-        <div class="content">280.00</div>
-      </div>
-
       <div class="profile_card">
         <div class="header">Tips</div>
-        <div class="content">0.00</div>
+        <div class="content" id="tips">0.00</div>
       </div>
     </div>
 
@@ -52,6 +46,17 @@
       let is_clock_in = user_data.is_clock_in;
       const getClockValue = document.getElementById('clock-in-out')
       const profile_clock = document.getElementById('profile_clock_in_out')
+
+      fetch(`http://127.0.0.1:8000/get_revenue_tax/${localStorage.getItem('user_id')}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }) .then(response => response.json())
+            .then(data => {
+              document.getElementById('tips').innerHTML = `$${data.tips}`
+              document.getElementById('revenue').innerHTML = `$${data.revenue}`
+            }).catch(error => console.error(error))
 
       if(is_clock_in){
           getClockValue.innerHTML = 'Clock Out'

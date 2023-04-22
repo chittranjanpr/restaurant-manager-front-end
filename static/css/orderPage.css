@@ -110,7 +110,7 @@ header {
   justify-content: space-around;
   flex-wrap: wrap;
   padding-right: 5px;
-  height: calc(100vh - 90px);
+  height: calc(100vh - 135px);
   overflow: scroll;
   overflow-x: hidden;
   margin-bottom: 10px;
