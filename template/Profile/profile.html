@@ -19,8 +19,7 @@
           <img src="./../../static/images/profile.jpg" />
         </div>
         <div class="bio_data">
-          <div class="profile_name">
-            Chittranjan P R
+          <div class="profile_name" id="name">
           </div>
           <div class="profile_clock" id="profile_clock_in_out">
           </div>
@@ -48,6 +47,7 @@
     </div>
 
     <script>
+      document.getElementById('name').innerHTML = JSON.parse(localStorage.getItem('user_data')).name;
       let user_data = JSON.parse(localStorage.getItem('user_data'))
       let is_clock_in = user_data.is_clock_in;
       const getClockValue = document.getElementById('clock-in-out')
